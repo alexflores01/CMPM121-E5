@@ -17,6 +17,12 @@ Deno.test("walking into a wall returns the very same puzzle", () => {
   assertStrictEquals(move(corridor, "up"), corridor);
 });
 
+Deno.test("only moves that push a craye count as pushes", () => {
+  const after = move(move(corridor, "right"), "right");
+  assertEquals(after.moves, 2);
+  assertEquals(after.pushes, 1);
+});
+
 Deno.test("walking into a crate pushes it one tile", () => {
   const after = move(move(corridor, "right"), "right");
   assertEquals(after.player, { x: 3, y: 1 });
